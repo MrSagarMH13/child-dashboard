@@ -8,7 +8,6 @@ import com.child.utils.StringUtil;
 import com.child.web.dto.ChildDTO;
 import com.child.web.exception.AlreadyActiveException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class ChildServiceImpl implements IChildService {
 
-    @Autowired
-    private ChildRepository childRepository;
+    private final ChildRepository childRepository;
 
-    @Autowired
-    private ChildMapper childMapper;
+    private final ChildMapper childMapper;
+
+    public ChildServiceImpl(ChildRepository childRepository, ChildMapper childMapper) {
+        this.childRepository = childRepository;
+        this.childMapper = childMapper;
+    }
 
     @Override
     public ChildDTO addChild(ChildDTO childDTO) {

@@ -5,6 +5,7 @@ import com.child.web.dto.ChildDTO;
 import com.child.web.response.SuccessResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ChildController {
     }
 
     @PostMapping
-    public ResponseEntity<SuccessResponse> addChild(@RequestBody ChildDTO childDTO) {
+    public ResponseEntity<SuccessResponse> addChild(@RequestBody @Validated ChildDTO childDTO) {
         log.info("Request to add child: {}", childDTO);
         ChildDTO createdChild = childService.addChild(childDTO);
         SuccessResponse response = new SuccessResponse("Child added successfully", createdChild);
